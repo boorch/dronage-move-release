@@ -267,8 +267,17 @@ wheel selects which LFO the 8 knobs are **shaping**:
 | `WAVE` | `RATE` | `PHASE` | `SKEW` | `DC` | `SMOO` | `LEN` | `VAR` |
 |--------|--------|---------|--------|------|--------|-------|-------|
 
-`RATE` is tempo-synced (a clock division). `LEN`/`VAR` apply to the
-sample-and-hold shapes.
+`WAVE` picks the shape: Sine, Tri, Saw up/down, Square, plus two
+sample-and-hold shapes (S&H-R random and S&H-S seeded). `RATE` is the
+tempo-synced cycle length, from very slow (/512) to very fast (x512). `PHASE`
+shifts the cycle start, `SKEW` warps it, `DC` adds an offset, and `SMOO` rounds
+the shape, softening S&H steps into glides between values.
+
+`LEN` and `VAR` apply to the sample-and-hold shapes. `LEN` is the number of
+steps per cycle (2 to 32). `VAR` is the S&H-R randomness:
+**at 0 the random pattern is frozen and simply loops** every cycle; turn it up
+and each step is re-rolled as it comes around, so the pattern keeps evolving
+(more `VAR` = bigger jumps).
 
 **Routing an LFO to a parameter:** **press and hold** an LFO's step (1 to 8),
 then **turn a knob**. That routes the LFO into the focused voice's parameter at
