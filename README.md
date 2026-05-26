@@ -128,10 +128,16 @@ The home view. The jog wheel moves between four pages; the 8 knobs edit the
 page's parameters.
 
 - **BASICS:** `BPM`, `ROOT` (key), `SCALE`, `SEED` (for the random/S&H sources).
-- **DELAY:** `FBK` (feedback), `TONE`, `RVB` (delay to reverb send), `MOD` (tape
-  wobble), `GRAN` (granular texture).
+- **DELAY:** `TIME` (tempo-synced division, 1/64 to 4 bars incl. triplet/dotted,
+  shared by the forward and reverse delay), `FBK` (feedback), `MOD` (tape
+  wobble), `TONE`, `GRAN` (granular texture), and `RVB` (delay to reverb send)
+  on the last knob.
 - **REVERB:** `SIZE`, `TIME`, `MOD` (diffusion), `TONE`, `SHIM` (shimmer).
-- **DIRT:** `FLOR` (noise floor), `COLR`, `BAL`, `HP`, `FAT` (compression).
+- **DIRT:** `FLOR` (noise floor), `COLR`, `BAL`, `HP`, `FAT` (bipolar master
+  compressor: turn **right** for transparent glue to heavy squash; turn **left**
+  for an extreme techno pump where the kick/low end drives the ducking but stays
+  dry and punchy while everything above it pumps, with analog-overdrive grit. The
+  far left crosses into negative-ratio territory for a reverse, vacuum-like duck).
 
 **Defaults:** 120 BPM, key of **C**, **Major** scale. `ROOT` and `SCALE` set the
 musical grid for pitch knobs and the pad keyboard. With `SCALE` set to **OFF** the
@@ -161,33 +167,30 @@ voice from muddying the mix. Pushed further, though, it can shift the proverbial
 role of a track entirely, thinning it out by stripping the low-frequency domain
 so it sits as a lighter, airier layer above everything else.
 
-**COLOR** (page 2), drive, sends and output:
+**COLOR** (page 2), drive, sends, LPG and placement:
 
-| `DRIV` | `CHOR` | `DLY` | `RVB` | `LPGD` | `OUT` | `PAN` | `LVL` |
-|--------|--------|-------|-------|--------|-------|-------|-------|
+| `DRIV` | `CHOR` | `DLY` | `RVB` | `LPGD` | `LPGC` | `PAN` | `LVL` |
+|--------|--------|-------|-------|--------|--------|-------|-------|
 
 `DRIV` is bipolar (doom one way, marshall the other); `DLY`/`RVB` are the send
-levels; `PAN`/`LVL` are placement and level.
-
-`OUT` sets how the voice's two raw outputs (a main signal and an aux signal) map
-to the stereo field:
-
-- **MIX:** blend both equally to mono (default).
-- **OUT:** main output only, mono.
-- **AUX:** aux output only, mono.
-- **STE:** stereo, main to the left channel, aux to the right.
-- **INV:** inverted stereo, main to the right and aux to the left (STE with the
-  two channels swapped).
+levels; `PAN`/`LVL` are placement and level. `LPGD`/`LPGC` shape the internal
+low-pass gate: `LPGD` is its decay time, and `LPGC` is its **colour** — the
+blend from a pure VCA (0%, level only) to a full low-pass filter (100%, which
+darkens the tone as the gate closes). All COLOR knobs are modulation targets.
 
 **STRUCT** (page 3), set-and-forget per-track behaviour:
 
-| `GATE` | `LEN` | `RSNC` | `CLK` | `QNT` | (none) | `ATK` | `DEC` |
-|--------|-------|--------|-------|-------|--------|-------|-------|
+| `GATE` | `LEN` | `RSNC` | `CLK` | `QNT` | `OUT` | `ATK` | `DEC` |
+|--------|-------|--------|-------|-------|-------|-------|-------|
 
 - `GATE` switches **DRN** (continuous drone) and **SEQ** (the step sequencer
   triggers the voice).
 - `LEN` is the loop length (2 to 16 steps); `RSNC` the resync length; `CLK` the
   per-track clock divider; `QNT` quantize-to-scale on/off.
+- `OUT` sets how the voice's two raw outputs (a main and an aux signal) map to
+  the stereo field: **MIX** (both to mono, default), **OUT** (main only),
+  **AUX** (aux only), **STE** (stereo: main left, aux right), **INV** (stereo
+  swapped). It lives here, not on COLOR, so it is not a modulation target.
 - `ATK`/`DEC` **are not a per-note amplitude envelope.** Despite the names, they
   are simply the **fade-in and fade-out times for the whole voice** when you gate
   it on or off with Shift+Track: a slew on the voice level. They default to a slow
