@@ -40,12 +40,11 @@ scenes per project, full undo, and direct-to-disk recording.
 **Launch:** on the Move, **Shift + Vol + Step 13**, then **Tools**, then
 **Dronage Move**.
 
-**Quit:** hold **Back + MODE (≡) + jog-click**, or use the MODE menu and choose
-**QUIT**.
+**Quit:** open the MODE (≡) menu and choose **QUIT** to return to Move firmware.
 
 **Make your first sound in 30 seconds:**
 
-1. You boot into **Global** view and **all four voices start muted on purpose**
+1. You boot into **Global** view and **all four voices start silent on purpose**
    (you really don't want four identical drones blaring at you the second it
    loads, nobody does).
 2. Hold **Shift** and tap **Track 1** to switch that voice on. You should hear a
@@ -115,7 +114,7 @@ holding.
 
 | Button   | Role                                                            |
 |----------|-----------------------------------------------------------------|
-| **Shift**| coarse edits; **Shift+Track** mutes or un-mutes a voice         |
+| **Shift**| coarse edits; **Shift+Track** fades a voice in or out           |
 | **DEL**  | reset / clear / remove                                          |
 | **COPY** | copy (a step, an LFO's routing, a scene, a project)             |
 | **LOOP** | set a track's loop length                                       |
@@ -202,10 +201,10 @@ to the stereo field:
 **Pitch and scale:** when `QNT` is on, turning the `PIT` knob steps through the
 notes of the current scale; Shift jumps by octaves.
 
-**Mute and un-mute:** **Shift + Track** toggles a voice on or off, from any view.
-This isn't a hard switch. The voice fades in over its `ATK` time and fades out
-over its `DEC` time (set on the STRUCT page), like a slew with settable attack
-and decay, so voices swell and release rather than snapping on and off.
+**Fading a voice in and out:** **Shift + Track** brings a voice in or out, from
+any view. It's not an instant mute. The voice fades in over its `ATK` time and
+fades out over its `DEC` time (set on the STRUCT page), like a slew with settable
+attack and decay, so voices swell and release rather than snapping on and off.
 
 ---
 
@@ -245,6 +244,18 @@ In Track view the 16 Step buttons are the focused voice's pattern. (Set `GATE` t
 | **Shift + COPY + tap**      | paste the clipboard into the step                   |
 | **LOOP + tap**              | set the track's loop length to that step            |
 | **Left / Right** (no hold)  | rotate the whole pattern                            |
+
+**One-shot vs latched steps:** each filled step is one of two kinds, toggled by
+Shift + tap, and the step LED brightness tells them apart (dim = one-shot, bright
+= latched):
+
+- A **one-shot step** applies its p-locks only while the playhead sits on it; on
+  the next step the voice returns to its base (knob) values.
+- A **latched step** holds its p-locks until the playhead reaches the next active
+  step, so its values carry across the empty steps in between.
+
+Both trigger the voice in SEQ mode; the only difference is whether the step's
+locked values persist afterward or revert immediately.
 
 **P-locks (parameter locks):** **press and hold** a step, then **turn any knob**
 on the SHAPE or COLOR page. That step now remembers its own value for that
@@ -434,7 +445,7 @@ quantized, out-of-phase lines, not in any single busy one.
 
 | Combo                     | Does                                       |
 |---------------------------|--------------------------------------------|
-| Shift + Track             | mute / un-mute a voice                     |
+| Shift + Track             | fade a voice in / out                      |
 | Shift + knob              | coarse edit                                |
 | DEL + knob                | reset knob to default                      |
 | Hold Step + knob          | p-lock that parameter on the step          |
@@ -449,7 +460,7 @@ quantized, out-of-phase lines, not in any single busy one.
 | Left / Right              | rotate pattern / nudge a held value        |
 | Undo / Shift + Undo       | undo / redo                                |
 | Play / Rec                | transport / record                         |
-| **Back + MODE + jog-click** | **quit to Move firmware**                |
+| Back + MODE + jog-click   | quit to firmware (fallback)                |
 
 ---
 
