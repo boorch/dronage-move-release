@@ -178,7 +178,26 @@ low-pass gate: `LPGD` is its decay time, and `LPGC` is its **colour** — the
 blend from a pure VCA (0%, level only) to a full low-pass filter (100%, which
 darkens the tone as the gate closes). All COLOR knobs are modulation targets.
 
-**STRUCT** (page 3), set-and-forget per-track behaviour:
+**EQ** (page 3), a per-voice 8-band graphic EQ:
+
+| `A` | `B` | `C` | `D` | `E` | `F` | `G` | `H` |
+|-----|-----|-----|-----|-----|-----|-----|-----|
+
+- Eight fixed bands from low to high (A is a low-shelf at ~90 Hz, B to G are peak
+  bands, H is a high-shelf at 4 kHz). Each knob cuts or boosts its band by up to
+  12 dB; center is flat (the band is bypassed at 0).
+- The screen draws the resulting response curve plus a bar per band; the
+  cap-touched knob's band is spelled out (letter and dB) and emphasised.
+- It sits at the **end of the voice's chain**, so it shapes both the dry sound
+  and what the voice sends to the delay and reverb. It is a utility tone control,
+  so it is **not** a modulation target and cannot be p-locked. `DEL` + a knob
+  resets that band to flat.
+- Every voice ends in an always-on safety limiter (a short-lookahead per-voice
+  limiter, the last element in the chain). Because an EQ band can boost up to
+  12 dB, this is what stops a boost (or just a hot sound) from clipping: it
+  smoothly turns the voice down instead of letting it distort.
+
+**STRUCT** (page 4), set-and-forget per-track behaviour:
 
 | `GATE` | `LEN` | `RSNC` | `CLK` | `QNT` | `OUT` | `ATK` | `DEC` |
 |--------|-------|--------|-------|-------|-------|-------|-------|
@@ -200,25 +219,6 @@ darkens the tone as the gate closes). All COLOR knobs are modulation targets.
   these are for. The fade always follows your Shift+Track gate in
   **both DRN and SEQ modes**: in SEQ the step triggers separately drive the
   voice's internal decay, while `ATK`/`DEC` still shape the overall swell on top.
-
-**EQ** (page 4), a per-voice 8-band graphic EQ:
-
-| `A` | `B` | `C` | `D` | `E` | `F` | `G` | `H` |
-|-----|-----|-----|-----|-----|-----|-----|-----|
-
-- Eight fixed bands from low to high (A is a low-shelf at ~90 Hz, B to G are peak
-  bands, H is a high-shelf at 4 kHz). Each knob cuts or boosts its band by up to
-  12 dB; center is flat (the band is bypassed at 0).
-- The screen draws the resulting response curve plus a bar per band; the
-  cap-touched knob's band is spelled out (letter and dB) and emphasised.
-- It sits at the **end of the voice's chain**, so it shapes both the dry sound
-  and what the voice sends to the delay and reverb. It is a utility tone control,
-  so it is **not** a modulation target and cannot be p-locked. `DEL` + a knob
-  resets that band to flat.
-- Every voice ends in an always-on safety limiter (a short-lookahead per-voice
-  limiter, the last element in the chain). Because an EQ band can boost up to
-  12 dB, this is what stops a boost (or just a hot sound) from clipping: it
-  smoothly turns the voice down instead of letting it distort.
 
 **Pitch and scale:** when `QNT` is on, turning the `PIT` knob steps through the
 notes of the current scale; Shift jumps by octaves.

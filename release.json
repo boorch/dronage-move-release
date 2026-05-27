@@ -1,6 +1,6 @@
 {
-  "version": "1.2.0",
-  "download_url": "https://github.com/boorch/dronage-move-release/releases/download/v1.2.0/dronage-tool-module.tar.gz",
+  "version": "1.2.1",
+  "download_url": "https://github.com/boorch/dronage-move-release/releases/download/v1.2.1/dronage-tool-module.tar.gz",
   "name": "Dronage Move",
   "description": "Ambient drone workstation (standalone takeover)"
 }
