@@ -151,7 +151,7 @@ isn't a voice.
 ## 5. Track view (editing a voice)
 
 Tap a **Track** button (1 to 4) to focus that voice and open its editor. Re-tap
-the same Track button to cycle its three pages (the jog wheel also switches
+the same Track button to cycle its four pages (the jog wheel also switches
 pages):
 
 **SHAPE** (page 1), the sound source and filter:
@@ -201,6 +201,25 @@ darkens the tone as the gate closes). All COLOR knobs are modulation targets.
   **both DRN and SEQ modes**: in SEQ the step triggers separately drive the
   voice's internal decay, while `ATK`/`DEC` still shape the overall swell on top.
 
+**EQ** (page 4), a per-voice 8-band graphic EQ:
+
+| `A` | `B` | `C` | `D` | `E` | `F` | `G` | `H` |
+|-----|-----|-----|-----|-----|-----|-----|-----|
+
+- Eight fixed bands from low to high (A is a low-shelf at ~90 Hz, B to G are peak
+  bands, H is a high-shelf at 4 kHz). Each knob cuts or boosts its band by up to
+  12 dB; center is flat (the band is bypassed at 0).
+- The screen draws the resulting response curve plus a bar per band; the
+  cap-touched knob's band is spelled out (letter and dB) and emphasised.
+- It sits at the **end of the voice's chain**, so it shapes both the dry sound
+  and what the voice sends to the delay and reverb. It is a utility tone control,
+  so it is **not** a modulation target and cannot be p-locked. `DEL` + a knob
+  resets that band to flat.
+- Every voice ends in an always-on safety limiter (a short-lookahead per-voice
+  limiter, the last element in the chain). Because an EQ band can boost up to
+  12 dB, this is what stops a boost (or just a hot sound) from clipping: it
+  smoothly turns the voice down instead of letting it distort.
+
 **Pitch and scale:** when `QNT` is on, turning the `PIT` knob steps through the
 notes of the current scale; Shift jumps by octaves.
 
@@ -208,6 +227,24 @@ notes of the current scale; Shift jumps by octaves.
 any view. It's not an instant mute. The voice fades in over its `ATK` time and
 fades out over its `DEC` time (set on the STRUCT page), like a slew with settable
 attack and decay, so voices swell and release rather than snapping on and off.
+
+**Randomizing a voice:** **hold the jog-wheel click, then tap a Track** to roll a
+fresh sound for that voice. It randomizes the whole SHAPE and COLOR pages at once,
+with curated per-knob ranges so the result stays musical (pitch and level are left
+untouched, so the voice keeps its place in the mix). The jog must be held before
+the Track press, and the track does not need to be selected first. Press again to
+re-roll; each roll is a single undo step, so Undo walks back through your rolls one
+at a time.
+
+**Seeing modulation at a glance:** on a voice's SHAPE and COLOR pages every value
+shows the live *result* of its modulation, not just the value you dialled in, so a
+glance tells you which parameters an LFO, macro, or p-lock is currently moving. The
+knob LEDs reinforce this: the LED brightness follows the live value, and its
+colour shows the direction relative to your setting. Green means the result is
+currently above the knob's base value, red means below, and white means the
+parameter is not being modulated. Touch a knob to read its true base value (the big
+number and the bar); if it is modulated, the live result is shown in parentheses at
+the very bottom of the screen, for example ( 76.3% ).
 
 ---
 
@@ -449,6 +486,7 @@ quantized, out-of-phase lines, not in any single busy one.
 | Combo                     | Does                                       |
 |---------------------------|--------------------------------------------|
 | Shift + Track             | fade a voice in / out                      |
+| Hold jog-click + Track    | randomize that voice's SHAPE + COLOR       |
 | Shift + knob              | coarse edit                                |
 | DEL + knob                | reset knob to default                      |
 | Hold Step + knob          | p-lock that parameter on the step          |
