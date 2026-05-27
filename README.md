@@ -229,9 +229,13 @@ fades out over its `DEC` time (set on the STRUCT page), like a slew with settabl
 attack and decay, so voices swell and release rather than snapping on and off.
 
 **Randomizing a voice:** **hold the jog-wheel click, then tap a Track** to roll a
-fresh sound for that voice. It randomizes the whole SHAPE and COLOR pages at once,
-with curated per-knob ranges so the result stays musical (pitch and level are left
-untouched, so the voice keeps its place in the mix). The jog must be held before
+fresh sound for that voice. It randomizes the whole SHAPE and COLOR pages plus the
+EQ at once, with curated per-knob ranges so the result stays musical. Level is left
+untouched (it stays a mix decision), and the **root note is preserved** so the
+voice keeps its tuning. The pitch may jump to a different octave of that same note,
+usually landing around octave 2 and occasionally higher or lower, so the register
+moves without ever changing the note. The EQ's mid bands get the full swing while
+the bass and treble bands stay gentler. The jog must be held before
 the Track press, and the track does not need to be selected first. Press again to
 re-roll; each roll is a single undo step, so Undo walks back through your rolls one
 at a time.
@@ -486,7 +490,7 @@ quantized, out-of-phase lines, not in any single busy one.
 | Combo                     | Does                                       |
 |---------------------------|--------------------------------------------|
 | Shift + Track             | fade a voice in / out                      |
-| Hold jog-click + Track    | randomize that voice's SHAPE + COLOR       |
+| Hold jog-click + Track    | randomize that voice's SHAPE + COLOR + EQ  |
 | Shift + knob              | coarse edit                                |
 | DEL + knob                | reset knob to default                      |
 | Hold Step + knob          | p-lock that parameter on the step          |
