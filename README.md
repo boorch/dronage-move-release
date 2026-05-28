@@ -32,6 +32,7 @@ scenes per project, full undo, and direct-to-disk recording.
 13. [Projects: save, load, new](#13-projects-save-load-new)
 14. [Recipe: ambient melodies](#14-recipe-ambient-melodies)
 15. [Cheat sheet](#15-cheat-sheet)
+16. [FAQ](#16-faq)
 
 ---
 
@@ -506,6 +507,94 @@ quantized, out-of-phase lines, not in any single busy one.
 | Undo / Shift + Undo       | undo / redo                                |
 | Play / Rec                | transport / record                         |
 | Back + MODE + jog-click   | quit to firmware (fallback)                |
+
+---
+
+## 16. FAQ
+
+**Q. How do I record notes into the sequencer?**
+
+You don't, and Dronage Move will not have that. Think of the sequencer more
+like a CV sequencer in modular terms: each step is a slot that can send a
+value (a "p-lock") to any knob in SHAPE or COLOR, and you can stack as many
+p-locks per step as you want. So instead of recording notes, you sequence
+parameter changes across many destinations at once. The whole point of the
+instrument (and the encouraged way of using it) is to make music using ONLY
+modulation: pick a scale to quantize to, point a sample-and-hold LFO at PITCH,
+and let it generate melodies for you.
+
+**Q. Why do the LPGD and LPGC values look glitched or dimmed out?**
+
+They are temporarily disabled. The LPG (low-pass gate) only opens and closes
+when the voice is triggered by the sequencer, so LPG Decay and LPG Colour
+have nothing to act on if the track's GATE is DRN (a drone is on all the
+time). Set GATE to SEQ on the STRUCT page and punch in some steps, and both
+values become live and editable.
+
+**Q. I launched it and there's no sound. Is it broken?**
+
+No. Dronage Move boots silent on purpose so you don't get four identical
+drones at once. Shift + tap a Track button (1 to 4) to fade that voice in.
+Re-tap with Shift to fade it out.
+
+**Q. I'm shaping an LFO and the rate / depth knobs work, but the sound isn't moving.**
+
+You shaped it but didn't route it. An LFO does nothing until you tell it
+which parameter to modulate. Hold the LFO's step (1 to 8 in the LFO view)
+and turn the knob you want to move; the LFO will then drive it. Repeat to
+assign the same LFO to more parameters.
+
+**Q. I turn a macro and nothing happens.**
+
+Same as the LFO question: macros don't act on anything until you assign them.
+Hold the macro's step in the macro view and turn the destination knob to
+route it. A macro is just an LFO that doesn't move, so you can sweep many
+parameters at once from a single knob.
+
+**Q. I press PLAY and nothing changes. My voices are all in DRN.**
+
+That's expected. Drone voices play continuously; the transport only matters
+for SEQ-mode voices, the step sequencer, and clock-synced LFOs. Set at least
+one voice's GATE to SEQ on the STRUCT page and punch in some steps to hear
+PLAY actually do something.
+
+**Q. I boost an EQ band and the voice gets *smaller*, not bigger.**
+
+That's the per-voice safety limiter doing its job. Every voice ends in an
+always-on look-ahead limiter so big EQ boosts (or hot engine settings) can't
+clip. If you want the boost to translate to more loudness, cut another band
+or pull the voice's level down a touch so the limiter has less work to do.
+
+**Q. I turn a knob a few times and one Undo rolls back all of them.**
+
+That's the coalescing window. Undo bundles edits to the same control made
+within about 400 ms into a single step, so dragging a knob across its range
+is one undo, not fifty. Pause briefly between adjustments if you want them
+to land as separate undos.
+
+**Q. Can Dronage Move follow external MIDI clock and transport?**
+
+Not yet. The hardware can receive USB-MIDI on Move's USB-A port and the data
+arrives at the right place in the SPI mailbox; the synth just doesn't decode
+tempo and transport from it today. It is on the list.
+
+**Q. Can Dronage Move send MIDI out?**
+
+No. Dronage is a self-contained synth; its modulation runs the local engine
+and nothing else.
+
+**Q. How do I get back to the regular Move firmware?**
+
+Open the MODE menu and pick QUIT. There is also a fallback combo if the menu
+is unreachable: hold Back, then MODE, then click the jog wheel.
+
+**Q. How do I randomize a voice's sound?**
+
+Hold the jog wheel down (click and keep holding), then tap a Track button
+(1 to 4). It will roll a fresh SHAPE, COLOR, EQ and octave for that voice,
+kept musical by curated ranges. Order matters: jog first, then Track. The
+track does not need to be selected first, and tapping it this way will not
+change its page.
 
 ---
 
