@@ -325,9 +325,20 @@ wheel selects which LFO the 8 knobs are **shaping**:
 
 `WAVE` picks the shape: Sine, Tri, Saw up/down, Square, plus two
 sample-and-hold shapes (S&H-R random and S&H-S seeded). `RATE` is the
-tempo-synced cycle length, from very slow (/512) to very fast (x512). `PHASE`
-shifts the cycle start, `SKEW` warps it, `DC` adds an offset, and `SMOO` rounds
-the shape, softening S&H steps into glides between values.
+LFO's cycle length and is **mode-aware**:
+
+- **Plain turn** steps a tempo-synced clock division, from very slow (/512) to
+  very fast (x512), and locks the LFO to the master clock.
+- **Shift + turn** switches the LFO to a free Hz mode and steps a value on a
+  log scale, 0.01 Hz to 200 Hz (one detent is about ±2 %, so just below
+  0.50 Hz you get roughly 0.01 Hz per detent). A free LFO ignores PLAY /
+  STOP and runs continuously.
+- **DEL + turn** resets the knob and snaps back to synced mode.
+
+The readout flips with the mode: a synced division like `/4` or a Hz value
+like `0.50Hz`. `PHASE` shifts the cycle start, `SKEW` warps it, `DC` adds an
+offset, and `SMOO` rounds the shape, softening S&H steps into glides between
+values.
 
 `LEN` and `VAR` apply to the sample-and-hold shapes. `LEN` is the number of
 steps per cycle (2 to 32). `VAR` is the S&H-R randomness:
