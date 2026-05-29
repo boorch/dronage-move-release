@@ -610,6 +610,16 @@ kept musical by curated ranges. Order matters: jog first, then Track. The
 track does not need to be selected first, and tapping it this way will not
 change its page.
 
+**Q. Can I make an LFO that's not locked to the tempo?**
+
+Yes. On the LFO view, **Shift + turn the RATE knob**. The LFO switches to a
+free Hz mode, with the rate dialed on a log scale from 0.01 Hz (one cycle
+every 100 seconds) up to 200 Hz. A free LFO ignores PLAY / STOP and runs
+continuously. The readout flips to a Hz value (like `0.50Hz`) instead of
+the synced division (`/4`, `x2`, etc.). A plain turn snaps back to synced
+mode and steps the clock division as usual; DEL + turn resets and forces
+synced mode.
+
 **Q. Where do my recordings go, and how do I get them off the Move?**
 
 They live on the Move at `/data/UserData/UserLibrary/Samples/Schwung/DronageMove/`,
