@@ -402,9 +402,12 @@ sweep collapses into a single undo step.
 
 - **Play** starts and stops. Stopping freezes the clock (LFOs and sequencers hold
   their position); starting resets everything to step 1.
-- **Rec** toggles WAV recording of the main output. Recordings are saved to
-  `…/DronageMove/recordings/` and normalised automatically. A take shorter than
-  5 seconds is discarded.
+- **Rec** toggles WAV recording of the main output. Recordings are saved on the
+  Move at `/data/UserData/UserLibrary/Samples/Schwung/DronageMove/` and
+  normalised automatically. Because that path is inside Move's standard
+  `Samples` library, **every recording is immediately playable as a sample in
+  Move's stock instruments** (Drum Rack, Sampler, etc.) without any extra
+  step. A take shorter than 5 seconds is discarded.
 
 ---
 
@@ -595,6 +598,63 @@ Hold the jog wheel down (click and keep holding), then tap a Track button
 kept musical by curated ranges. Order matters: jog first, then Track. The
 track does not need to be selected first, and tapping it this way will not
 change its page.
+
+**Q. Where do my recordings go, and how do I get them off the Move?**
+
+They live on the Move at `/data/UserData/UserLibrary/Samples/Schwung/DronageMove/`,
+named `<project>_<timestamp>.wav` (or `recording_<timestamp>.wav` if you have
+not saved a project yet). Each take is auto-normalised on stop; anything
+shorter than 5 seconds is discarded.
+
+Because the folder sits inside Move's standard `Samples` library, **the
+recording is instantly available as a playable sample in Move's stock
+instruments** (Drum Rack, Sampler, etc.) without any copy step. Stop the
+recording, switch to a stock Move instrument, and the file is right there
+in the browser.
+
+To pull files onto your computer (or back them up), the easiest way is the
+built-in web file browser:
+
+- **Schwung Manager's web file browser** (no extra tools needed). On a
+  computer on the same Wi-Fi as your Move, open:
+  `http://move.local:7700/files?path=/data/UserData/UserLibrary/Samples/Schwung/DronageMove`
+
+  You'll get a directory listing in the browser; click a file to download
+  it. Bookmark the URL for one-click access. Schwung Manager also has tabs
+  for **Modules**, **Files** (the same browser, starting at `/`), **Config**,
+  **System**, **Help**, **Remote UI**, and **Screen Mirroring** at the same
+  port.
+
+For terminal users / power users, all of the options below use the **same
+SSH key** you set up when installing Schwung; no extra credentials needed.
+
+- **scp** (one-liner from a terminal):
+
+  ```
+  scp 'ableton@move.local:/data/UserData/UserLibrary/Samples/Schwung/DronageMove/*.wav' .
+  ```
+
+- **Cyberduck** (recommended GUI client; also what Schwung's own docs point
+  at). In Cyberduck:
+  1. **Open Connection** > **SFTP (SSH File Transfer Protocol)**
+  2. Server `move.local`, Port `22`, Username `ableton`
+  3. Select your SSH private key under **SSH Private Key**
+  4. Connect, navigate to `Samples/Schwung/DronageMove/`, drag files out
+  5. Save as a bookmark for one-click access next time
+
+- **Any other SFTP client** works the same way (FileZilla, Transmit, WinSCP,
+  etc.): host `move.local`, user `ableton`, port `22`, key authentication.
+
+- **rsync** for incremental pulls of long sessions:
+
+  ```
+  rsync -av ableton@move.local:/data/UserData/UserLibrary/Samples/Schwung/DronageMove/ ./recordings/
+  ```
+
+- **Schwung's "File Browser" tool module** (catalog id `file-browser`) lets
+  you rename, duplicate, move, or delete recordings **on the device itself**,
+  on its screen, with the jog wheel. It does not transfer files off the
+  Move; use one of the methods above for that.
 
 ---
 
