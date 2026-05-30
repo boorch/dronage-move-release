@@ -231,9 +231,9 @@ attack and decay, so voices swell and release rather than snapping on and off.
 
 **Randomizing a voice:** **hold the jog-wheel click, then tap a Track** to roll a
 fresh sound for that voice. It randomizes the whole SHAPE and COLOR pages plus the
-EQ at once, with curated per-knob ranges so the result stays musical. Level is left
-untouched (it stays a mix decision), and the **root note is preserved** so the
-voice keeps its tuning. The pitch may jump to a different octave of that same note,
+EQ at once, with curated per-knob ranges so the result stays musical. Level and
+pan are left untouched (they stay mix decisions), and the **root note is
+preserved** so the voice keeps its tuning. The pitch may jump to a different octave of that same note,
 usually landing around octave 2 and occasionally higher or lower, so the register
 moves without ever changing the note. The EQ's mid bands get the full swing while
 the bass and treble bands stay gentler. The jog must be held before
@@ -326,6 +326,15 @@ walking through the current scale exactly like the base PIT knob does
 the lock and let the step play the base again). LFOs and macros aimed at PIT
 still modulate around whatever pitch the step plays, so a locked step keeps
 its vibrato or sweeps.
+
+**Randomize a step's sound by tapping:** **triple-tap a step** to roll random
+locks for its core sound (HARM, TIMB, MORF and the LPG's decay + colour);
+**quadruple-tap** to also randomize its ENGINE. The taps must be quick (within
+about 250 ms of each other). It works on empty steps too (the step fills and
+activates), so rapid-tapping across a row is a fast way to sketch a generative
+pattern. Only those parameters are touched; any other locks on the step
+(pitch, filter, sends, pan) stay. Each roll is one undo step, so Undo walks
+back through them, and an accidental roll is easy to take back.
 
 While stopped, holding a step also auditions it so you can hear what you're
 editing.
