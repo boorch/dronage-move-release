@@ -310,6 +310,23 @@ parameter. While holding a step:
 - **Left / Right** nudge the highlighted lock,
 - **jog-click / DEL** clear the highlighted lock.
 
+**Pitch-lock from the pad keyboard:** while a step is held, **tap a pad** to
+lock that pad's note onto the step. The lock stores an **absolute** pitch
+(not an offset from base), so the step plays the pressed pad's exact note
+regardless of where the voice's base PIT knob sits. Change the base
+afterwards and your locked steps stay put. On the held-step screen and the
+touch readout the lock shows as the actual **note name**, e.g. `PIT G3`,
+`PIT C2`, or `PIT C4 +27` when a microtonal scale lands the note off the
+12-TET grid (signed cents from the nearest semitone). Multi-held steps all
+receive the same lock at once.
+
+Turning the **PIT knob** while a step is held also writes the pitch lock,
+walking through the current scale exactly like the base PIT knob does
+(plain turn = one scale step, Shift + turn = one octave, DEL + turn = clear
+the lock and let the step play the base again). LFOs and macros aimed at PIT
+still modulate around whatever pitch the step plays, so a locked step keeps
+its vibrato or sweeps.
+
 While stopped, holding a step also auditions it so you can hear what you're
 editing.
 
